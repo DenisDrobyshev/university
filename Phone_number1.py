@@ -20,10 +20,10 @@ def normalize_name(name):
     name.lower()
 
     name_surname = name.split(' ')
-    name_surname[0] = name_surname[0].capitalize()
-    name_surname[1] = name_surname[1].capitalize()
+    name_surname[0] = name_surname[0].title()
+    name_surname[1] = name_surname[1].title()
 
-    name = name_surname[0] + ' ' + name_surname[1]
+    name = ' '.join(name_surname)
 
     return name
 
