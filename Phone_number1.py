@@ -1,7 +1,7 @@
 phone_book = {}
 
-
-def normalize_phone_number(number):
+def get_num():
+    number = input('Введите номер: ')
     number = number.replace(' ', '').replace('-', '')
 
     if number[:2] == '+7' and len(number) == 12:
@@ -15,50 +15,39 @@ def normalize_phone_number(number):
 
     return '0'
 
-
-def normalize_name(name):
+def get_name():
+    name = input('Введите имя контакта: ')
     name.lower()
 
     name_surname = name.split(' ')
-    name_surname[0] = name_surname[0].title()
-    name_surname[1] = name_surname[1].title()
+    for i in range(0, len(name_surname)):
+        name_surname[i] = name_surname[i].capitalize()
 
     name = ' '.join(name_surname)
 
     return name
 
-
 def add_contact(name, number):
-    if normalize_phone_number(number) != '0':
-        number = normalize_phone_number(number)
-        name = normalize_name(name)
-
+    if number != '0':
         print(number, name)
-
         phone_book[name] = number
         print('Добавлено')
     else:
         print('Неправильно набран номер')
 
-
 def remove_contact(name):
-    name = normalize_name(name)
-    phone_book.pop(name, 'Такого контакта в книге нет')
+    print(phone_book.pop(name, 'Такого контакта в книге нет'))
     print('Удалено')
 
-
 def change_contact(name, number):
-    name = normalize_name(name)
     if name in phone_book:
         phone_book[name] = number
     else:
         print('Такого контакта в книге нет')
 
-
 def show_contacts():
     for i in phone_book:
         print(i + ' ' + phone_book[i])
-
 
 while True:
     print('1 - Добавить контакт \n2 - Удалить контакт (по имени) '
@@ -67,18 +56,13 @@ while True:
     command = int(input('Введите команду: '))
 
     if command == 1:
-        name = input('Введите имя и фамилию \n')
-        number = input('Введите номер \n')
-        add_contact(name, number)
+        add_contact(get_name(), get_num())
     elif command == 2:
-        name = input('Введите имя и фамилию \n')
-        remove_contact(name)
+        remove_contact(get_name())
     elif command == 3:
         show_contacts()
     elif command == 4:
-        name = input('Введите имя и фамилию \n')
-        number = input('Введите новый номер \n')
-        change_contact(name, number)
+        change_contact(get_name(), get_num())
     elif command == 5:
         break
     else:
