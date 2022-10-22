@@ -1,58 +1,100 @@
-import random
+from random import *
 
-def is_valid(n, x, y): # проверка на соответствие введенного значения условию
-    return n.isdigit() and float(n) - int(float(n)) == 0 and x <= int(n) <= y
+def is_bet_good(bet):
+    return len(bet) == 3 and 100 <= bet[0] <= balance and bet[0] <= balance_bot and bet[1] in list_coef and bet[2] in list_bet
 
-
-def input_num(down_num = 0, up_num = 99999999999999999999999999): # ввод данных, значениями по умолчанию заданы верхний и нижний возможные пределы
-    while True:
-        guess = input()
-        if is_valid(guess, down_num, up_num):
-            return int(guess)
+def quantity_trying(bet):
+    if bet[2] == 100:
+        if bet[1] == 2:
+            return 6
+        elif bet[1] == 4:
+            return 5
         else:
-            print(f'Введите число от {down_num} до {up_num}!')
-
-
-def compare_num(down_num, up_num): # Сравнение введенного значения с загаданным
-    num = random.randint(down_num, up_num)
-    total = 0
-    while True:
-        n = input_num(down_num, up_num)
-        total += 1
-        if n < num:
-            print('Не угадали, попробуйте число побольше')
-        elif n > num:
-            print('А теперь назовите число поменьше')
+            return 4
+    elif bet[2] == 1000:
+        if bet[1] == 2:
+            return 9
+        elif bet[1] == 4:
+            return 8
         else:
-            print(f'Победа! Вы угадали ответ за {total} попыток, поздравляем!' )
+            return 7
+    else:
+        if bet[1] == 2:
+            return 13
+        elif bet[1] == 4:
+            return 12
+        else:
+            return 11
+
+def game():
+    global balance
+    global balance_bot
+    print('Итак, ситуация такова:')
+    print('\nТвой баланс:', balance, 'коинов')
+    print('Мой баланс:', balance_bot, 'коинов')
+    print('Доступные коэффициенты:')
+    print('коэф. 2, при ставке на: [1-100 - 6 попыток] [1-1000 - 9 попыток] [1-10000 - 13 попыток]')
+    print('коэф. 4, при ставке на: [1-100 - 5 попыток] [1-1000 - 8 попыток] [1-10000 - 12 попыток]')
+    print('УНИКАЛЬНАЯ ВОЗМОЖНОСТЬ: коэф. 10, при ставке на: [1-100 - 4 попыток] [1-1000 - 7 попыток] [1-10000 - 11 попыток]')
+
+    print('Чтобы сделать ставку, введите через ПРОБЕЛЫ БЕЗ СКОБОК: [Cумма ставки (мин. 100 коинов)] [выбранный коэф.] [последнее число диапазона чисел] (к примеру: 500 4 10000)')
+    bet = [int(i) for i in input().split()]
+    while not is_bet_good(bet):
+        bet = [int(i) for i in input('Неправильный формат! Формат должен быть: Сумма(не менее 100) Коэффициент(2, 4, 10) Ограничивающее_Число(1000, 10000 или 100000): ').split()]
+
+    number = randint(1, bet[2])
+    trying = quantity_trying(bet)
+    balance -= bet[0]
+    balance_bot += bet[0]
+    print('Я загадал число в диапазоне от 1 до', bet[2], '. Попробуй угадай! У тебя', trying, 'попыток.')
+
+    while True:
+        num = int(input())
+        trying -= 1
+        if trying < 1:
+            print('Сожалею, но твои попытки закончились. Ты проиграл свою ставку. Кстати, загадал я число', number)
             break
-
-
-def continue_game(): # Предложение продолжить игру
-    ans = input('Хотите продолжить ("д"/"н")?\n')
-    while True:
-        if ans not in ('y', 'д', 'n', 'н'):
-            ans = input('Вроде, взрослый человек, а на простой вопрос ответить не может...\nПродолжим ("д"/"н")?\n')
-        elif ans in ('n', 'н'):
-            print('До новых встреч!!!')
-            return False
+        elif num > number:
+            print('Моё число поменьше. Попробуй ещё разок. У тебя осталось', trying, 'попыток')
+        elif num < number:
+            print('Моё число больше. Попробуй ещё разок. У тебя осталось', trying, 'попыток')
         else:
-            return True
-
-
-def game(): # Запуск игры
-    print('Добро пожаловать в числовую угадайку!')
-    while True:
-        print('Укажите, в каком диапазоне Вы готовы угадывать числа:\n')
-        x, y = input_num(), input_num()
-        if x > y:
-            x, y = y, x
-        print('Введите число от', x, 'до', y, '\n')
-        compare_num(x, y)
-        if continue_game():
-            continue
-        else:
+            print('Везёт тебе,', name.title(), '. Выигрыш в', bet[0] * bet[1], 'твой. Всё по честному.')
+            balance += bet[0] * bet[1]
+            balance_bot -= bet[0] * bet[1]
             break
+    next = input('Чтобы продолжить игру напишите "Далее"')
+    while next.lower() != 'далее':
+        next = input('Чтобы продолжить напишите "Далее"')
+
+    game()
 
 
-game() # Вызов игры
+print('Добро пожаловать в игру "Числовая угадайка". Меня зовут Денис! Я помогу тебе освоиться в игре. Чтобы продолжить, введи "Далее"')
+next = input()
+while next.lower() != 'далее':
+    next = input('Чтобы продолжить, введи "Далее"')
+
+print('''\n
+Итак, правила игры просты. 
+У тебя есть игровой баланс: 1000 коинов. 
+Чтобы стать Коинщиком, тебе надо выиграть у меня мои 9000 коинов и не потерять свои деньги. 
+Это будет непросто. Ты должен угадывать загаданные мной числа в определенном диапазоне 
+и за определённое количество попыток, которые ты можешь выбрать сам. 
+Чем меньше ты выберешь попыток, тем больше денег можешь выиграть. 
+Но будь осторожен. если проигрываешь - я забираю твою ставку. Ты готов начинать? Напиши "Да" или "Готов"
+''')
+
+next = input()
+
+while next.lower() != 'готов' and next.lower() != 'готова' and next.lower() != 'да':
+    next = input('Чтобы продолжить, введи "Да" или "Готов"')
+name = input('Сперва, тебе стоит представиться. Всё-таки нам предстоит провести вместе время, мне стоит знать, как тебя зовут :)\n')
+print('\n\nРад знакомству', name.title())
+
+balance = 1000
+balance_bot = 9000
+list_coef, list_bet = [2, 4, 10], [100, 1000, 10000]
+list_try2, list_try4, list_try10 = [6, 9, 13], [5, 8, 12], [4, 7, 11]
+
+game()
