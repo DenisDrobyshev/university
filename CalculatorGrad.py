@@ -9,7 +9,7 @@ def deg_to_gms(deg):
     minutes_ost = (deg - grad) * 60
     minutes = int(minutes_ost)
     second = (minutes_ost - minutes) * 60
-    return f"{grad}° {minutes}` {second}"
+    return f'{grad}° {minutes}` {round(second, 5)}"'
 
 def gms_to_deg(deg, minutes, seconds):
     '''

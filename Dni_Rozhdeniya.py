@@ -1,21 +1,33 @@
 import random
-day = 365
 
-def birthday(iter, count):
+def birthday(people_counter, iteration):
+    days = [day for day in range(0, 29)]
+    months = [month for month in range(0, 13)]
 
-    paradoxed = 0
-    ok = 0
+    count = 0
+    count_not = 0
 
-    for _ in range(iter):
-        birthdays = [random.randint(1, day) for _ in range(count)]
-        uniq = set(birthdays)
-        if len(birthdays) != len(uniq):
-            paradoxed += 1
-        else:
-            ok += 1
+    for iterations in range(0, iteration+1):
+        l1 = []
+        l2 = []
 
+        for i in range(0, people_counter+1):
+            l1.append(random.choice(days))
+            l2.append(random.choice(months))
 
-    return  f"""Всего итераций: {iter}
-Парадокс произошел в: {paradoxed/iter * 100}%"""
+        for i in range(0, people_counter):
+            if l1.count(l1[i]) == 1 or l2.count(l2[i]) == 1:
+                count_not += 1
+                pass
+            for j in range(0, people_counter):
+                if j == i:
+                    pass
 
-print(birthday(100000, 23))
+                if l1[j] == l1[i] and l2[j] == l2[i]:
+                    count += 1
+
+    return f"количество совпадений: {count} \n" \
+           f"количество промахов: {count_not} \n" \
+           f"вероятность совпадения: {(count * 100) / (count_not + count)}"
+
+print(birthday(24, 10000))
