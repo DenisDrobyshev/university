@@ -1,4 +1,4 @@
-from CalculatorGrad import deg_to_gms
+from practice.practice import deg_to_gms
 
 def create_list(*args, **kwargs):
     ls = []
