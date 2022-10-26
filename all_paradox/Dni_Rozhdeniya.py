@@ -30,5 +30,5 @@ def birthday(people_counter, iteration):
     return f"количество совпадений: {count} \n" \
            f"количество промахов: {count_not} \n" \
            f"вероятность совпадения: {(count * 100) / (count_not + count)}"
-
-print(birthday(23, 10000))
+if __name__ == "__main__":
+    print(birthday(23, 10000))
