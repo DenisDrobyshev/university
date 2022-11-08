@@ -1,4 +1,4 @@
-from WheelOfFortune.help_manager import lock_sym
+from help_manager import lock_sym
 
 def lock_word(word):
     word_list = [x for x in word]

@@ -1,4 +1,4 @@
-import WheelOfFortune.general_sys as gs
+import general_sys as gs
 
 
 def start_game():

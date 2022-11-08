@@ -1,6 +1,6 @@
-import WheelOfFortune.help_manager as hm
-import WheelOfFortune.difficult_level_sys as dls
-import WheelOfFortune.word_combination as wc
+import help_manager as hm
+import difficult_level_sys as dls
+import word_combination as wc
 
 def winner():
     print('Победитель! Призы в студию!')
@@ -13,7 +13,7 @@ def winner():
 
 def start_game():
     life_count = 0
-    if not dls.live_count:
+    if not dls.set_difficult:
         lifes_count = dls.difficult_live_count()
         dls.lifes = lifes_count
         dls.live_count = True
