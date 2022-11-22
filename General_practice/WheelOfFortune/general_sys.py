@@ -1,5 +1,5 @@
 import help_manager as hm
-import difficult_level_sys as dls
+import difficulty_level as dl
 import word_combination as wc
 
 def winner():
@@ -12,13 +12,13 @@ def winner():
         hm.new_record()
 
 def start_game():
-    life_count = 0
-    if not dls.set_difficult:
-        lifes_count = dls.difficult_live_count()
-        dls.lifes = lifes_count
-        dls.live_count = True
+    lifes_count = 0
+    if not dl.set_difficult:
+        lifes_count = dl.count_life()
+        dl.lifes = lifes_count
+        dl.set_difficult = True
     else:
-        lifes_count = dls.lifes
+        lifes_count = dl.lifes
     current_word = hm.build_random_word()
     lock_word = wc.lock_word(current_word)
 

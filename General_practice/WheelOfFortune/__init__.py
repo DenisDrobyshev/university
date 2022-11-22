@@ -1,5 +1,10 @@
-from General_practice.WheelOfFortune.difficult_level_sys import *
-from General_practice.WheelOfFortune.help_manager import *
-from General_practice.WheelOfFortune.general_sys import *
-from General_practice.WheelOfFortune.main import *
-from General_practice.WheelOfFortune.word_combination import *
+import sys
+import os
+
+sys.path.append(os.path.dirname(__file__))
+
+from .word_combination import *
+from .difficulty_level import *
+from .general_sys import *
+from .help_manager import *
+from .main import *
