@@ -1,6 +1,9 @@
 import general_sys as gs
 
-def start_game():
+def start_game() -> None:
+    """
+    Главная функция создает игру
+    """
     while True:
         command = int(input('1 - Начать игру, 2 - Выход \n'))
 

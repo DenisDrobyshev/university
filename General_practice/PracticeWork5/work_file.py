@@ -1,10 +1,17 @@
-def file_to_list(name):
+from typing import Union
+def file_to_list(name) -> Union[list, str]:
+    """
+    Функция считывает числа с файла и возвращает их в виде списка,
+    также обрабатывает ошибки если они имеются
+    :param name: имя файла
+    :return: список чисел
+    """
     try:
         global file
         file = open(name)
-        k = int(file.readline())
-        lists = file.read().splitlines()
-        lens = len(lists)
+        k: int = int(file.readline())
+        lists: list = file.read().splitlines()
+        lens: int = len(lists)
         if (lens > k) or (lens == 0) or (lens < k):
             raise Exception('Вы ввели слишком много/мало символом или не ввели вовсе')
         else:
@@ -25,4 +32,4 @@ def file_to_list(name):
             print(ex)
             pass
 
-print(file_to_list('text2.txt'))
+print(file_to_list('text.txt'))

@@ -1,8 +1,11 @@
-lifes = 0
-set_difficult = False
+lifes: int = 0
+set_difficult: bool = False
 
-def count_life():
-    choice = int(input('Введите уровень сложности: 1-легко, 2-средне, 3-сложно '))
+def count_life() -> int:
+    """
+    :return: количество жизней в зависимости от выбора уровня сложности
+    """
+    choice: int = int(input('Введите уровень сложности: 1-легко, 2-средне, 3-сложно '))
 
     if choice == 1:
         return 10

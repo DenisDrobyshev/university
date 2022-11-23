@@ -2,7 +2,10 @@ import help_manager as hm
 import difficulty_level as dl
 import word_combination as wc
 
-def winner():
+def winner() -> None:
+    """
+    Функция засчитывает победу
+    """
     print('Победитель! Призы в студию!')
     hm.session_record += 1
 
@@ -11,20 +14,23 @@ def winner():
         hm.record = hm.session_record
         hm.new_record()
 
-def start_game():
-    lifes_count = 0
+def start_game() -> None:
+    """
+    Функция проводит игру до проигрыша или когда слова закончились
+    """
+    lifes_count: int = 0
     if not dl.set_difficult:
         lifes_count = dl.count_life()
         dl.lifes = lifes_count
         dl.set_difficult = True
     else:
         lifes_count = dl.lifes
-    current_word = hm.build_random_word()
-    lock_word = wc.lock_word(current_word)
+    current_word: str = hm.build_random_word()
+    lock_word: str = wc.lock_word(current_word)
 
     while True:
         print(f'{lock_word} | {hm.love_sym}x{lifes_count}')
-        player_answer = input('Назовите букву или слово целиком: ')
+        player_answer: str = input('Назовите букву или слово целиком: ')
 
         if player_answer == current_word:
             winner()
