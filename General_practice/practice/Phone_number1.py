@@ -1,6 +1,11 @@
-phone_book = {}
+from ctypes import Union
 
-def get_num():
+phone_book: Union(dict, set) = {}
+
+def get_num() -> str:
+    """
+    :return: номер в правильном формате
+    """
     number = input('Введите номер: ')
     number = number.replace(' ', '').replace('-', '')
 
@@ -15,8 +20,11 @@ def get_num():
 
     return '0'
 
-def get_name():
-    name = input('Введите имя контакта: ')
+def get_name() -> str:
+    """
+    :return: имя в правильном формате
+    """
+    name = input('Введите имя контакта: \n')
     name.lower()
 
     name_surname = name.split(' ')
@@ -27,7 +35,12 @@ def get_name():
 
     return name
 
-def add_contact(name, number):
+def add_contact(name: str, number: str) -> None:
+    """
+    Добавляет новый контакт в записную книжку
+    :param name: имя контакта
+    :param number: номер контакта
+    """
     if number != '0':
         print(number, name)
         phone_book[name] = number
@@ -35,17 +48,29 @@ def add_contact(name, number):
     else:
         print('Неправильно набран номер')
 
-def remove_contact(name):
+def remove_contact(name: str):
+    """
+    Удаляет контакт из записной по имени
+    :param name: имя контакта
+    """
     print(phone_book.pop(name, 'Такого контакта в книге нет'))
     print('Удалено')
 
-def change_contact(name, number):
+def change_contact(name: str, number: str) -> None:
+    """
+    Изменяет данные существующего контакта
+    :param name: имя контакта
+    :param number: номер контакта
+    """
     if name in phone_book:
         phone_book[name] = number
     else:
         print('Такого контакта в книге нет')
 
-def show_contacts():
+def show_contacts() -> None:
+    """
+    Показывает все контакты в книге
+    """
     for i in phone_book:
         print(i + ' ' + phone_book[i])
 
@@ -53,7 +78,7 @@ while True:
     print('1 - Добавить контакт \n2 - Удалить контакт (по имени) '
           '\n3 - Просмотреть телефонную книгу \n4 - Изменить номер телефона (по имени) \n5 - Выход')
 
-    command = int(input('Введите команду: '))
+    command: int = int(input('Введите команду: '))
 
     if command == 1:
         add_contact(get_name(), get_num())
