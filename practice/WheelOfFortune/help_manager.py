@@ -6,10 +6,10 @@ session_record: int = 0
 record: int = 0
 words_list: list = []
 
-with open('/Users/denis.drobyshev/Desktop/project_1/General_practice/WheelOfFortune/words_file') as hm:
+with open('/practice/WheelOfFortune/words_file') as hm:
     words_list = hm.read().splitlines()
 
-with open('/Users/denis.drobyshev/Desktop/project_1/General_practice/WheelOfFortune/record_file') as hm:
+with open('/practice/WheelOfFortune/record_file') as hm:
     record = int(hm.read())
 def new_record():
     """
