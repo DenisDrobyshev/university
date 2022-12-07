@@ -29,13 +29,13 @@
 # pattern = r"\b[A-Za-z0-9\._-]+@[A-z0-9]+\.[A-z]+"
 # match = re.findall(pattern, string)
 
-import re
-import ssl
-import urllib.request
-
-ssl._create_default_https_context = ssl._create_unverified_context
-tel_nums = urllib.request.urlopen("https://www.summet.com/dmsi/html/codesamples/addresses.html").read().decode()
-print(tel_nums)
+# import re
+# import ssl
+# import urllib.request
+#
+# ssl._create_default_https_context = ssl._create_unverified_context
+# tel_nums = urllib.request.urlopen("https://www.summet.com/dmsi/html/codesamples/addresses.html").read().decode()
+# print(tel_nums)
 
 
 # match = pattern.findall(tel_nums)
