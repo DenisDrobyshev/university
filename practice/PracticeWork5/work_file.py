@@ -1,5 +1,5 @@
-from typing import Union
-def file_to_list(name) -> Union[list, str]:
+
+def file_to_list(name):
     """
     Функция считывает числа с файла и возвращает их в виде списка,
     также обрабатывает ошибки если они имеются
@@ -7,7 +7,6 @@ def file_to_list(name) -> Union[list, str]:
     :return: список чисел
     """
     try:
-        global file
         file = open(name)
         k: int = int(file.readline())
         lists: list = file.read().splitlines()
@@ -20,7 +19,7 @@ def file_to_list(name) -> Union[list, str]:
     except FileNotFoundError:
         return 'Файл не найден'
     except ValueError:
-        return 'Недопустимое значение для первой строчки'
+        return 'В файле присутвуют символы или вообще ничего не присутствует'
     except Exception as ex:
         return f'Ошибка обработки: {str(ex)}'
     finally:
@@ -31,5 +30,6 @@ def file_to_list(name) -> Union[list, str]:
         except Exception as ex:
             print(ex)
             pass
+
 
 print(file_to_list('text.txt'))
