@@ -7,6 +7,7 @@ def file_to_list(name):
     :return: список чисел
     """
     try:
+        file = None
         file = open(name)
         k: int = int(file.readline())
         lists: list = file.read().splitlines()
@@ -23,13 +24,9 @@ def file_to_list(name):
     except Exception as ex:
         return f'Ошибка обработки: {str(ex)}'
     finally:
-        try:
+        if file != None:
             file.close()
-        except NameError:
-            print('Неверное название')
-        except Exception as ex:
-            print(ex)
-            pass
 
 
-print(file_to_list('text.txt'))
+name = input()
+print(file_to_list(name))
