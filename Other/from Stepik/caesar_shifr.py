@@ -3,8 +3,8 @@
 print('Шифр Цезаря')
 
 lang = input('Выберите язык. Русский или английский. Введите ru или en: ')
-direction = input('Что вы ходите сделать? Шифрование или дешифрование? Введите cipher или decipher: ')
-if direction == 'decipher':
+choice = input('Что вы ходите сделать? Шифрование или дешифрование? Введите cipher или decipher: ')
+if choice == 'decipher':
     question = input('Вы знаете шаг сдвига? yes или no: ')
     if question == 'yes':
         step = input('Введите шаг сдвига: ')
@@ -48,20 +48,20 @@ def ceasar_cipher(text, alphabet, step):
 
 
 def is_valid_input(direction, lang):
-    if direction == 'cipher' or direction == 'decipher':
+    if choice == 'cipher' or choice == 'decipher':
         if lang == 'ru' or lang == 'en':
             return True
     else:
         return False
 
 
-if is_valid_input(direction, lang):
-    if direction == 'cipher':
+if is_valid_input(choice, lang):
+    if choice == 'cipher':
         if lang == 'en':
             print(ceasar_cipher(original_text, en_alphabet, step))
         else:
             print(ceasar_cipher(original_text, ru_alphabet, step))
-    elif direction == 'decipher':
+    elif choice == 'decipher':
         if lang == 'en':
             if question == 'yes':
                 print(ceasar_cipher(original_text, en_alphabet, -(int(step))))

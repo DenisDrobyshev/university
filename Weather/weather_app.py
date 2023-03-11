@@ -8,7 +8,7 @@ current_time = now.strftime('%H:%M:%S')
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
-town = input()
+town = input('Введите город на английском: ')
 
 data = urllib.request.urlopen(f"https://api.openweathermap.org/data/2.5/weather?q={town}&units=metric&lang=ru&appid"
                               f"=c341e34f9b7c327502cde34aa7817c5f").read().decode()
