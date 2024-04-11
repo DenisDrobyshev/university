@@ -1,1 +1,3 @@
-![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%2336BCF7&lines=First+project+for+univer+MIIGAiK)
+A python home project is a collection of all sorts of tasks and algorithms that I decided to save to this repository.
+
+![](photo.jpeg)
